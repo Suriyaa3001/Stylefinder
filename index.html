@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleFinder - Book Your Perfect Stylist</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 2s ease-in-out 1s forwards;
+        }
+        .loader-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader-text">Loading StyleFinder...</div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1 style="color: #fff; margin: 0;">StyleFinder</h1>
+            <p style="color: #f0f0f0; font-size: 14px;">Your Perfect Look Awaits</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+            <ul id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#search">Find Stylist</a></li>
+                <li><a href="#stylists">Our Stylists</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2 class="fade-in">Discover Top Stylists Near You</h2>
+                <p>Book appointments from affordable to premium stylists based on experience and ratings</p>
+                <a href="#search" class="cta-button">Get Started</a>
+            </div>
+        </section>
+
+        <section id="search" class="search-section">
+            <div class="container">
+                <h2>Find Your Stylist</h2>
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="Enter city or zip code" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Type</label>
+                        <select id="service" name="service">
+                            <option value="haircut">Haircut</option>
+                            <option value="coloring">Hair Coloring</option>
+                            <option value="styling">Hair Styling</option>
+                            <option value="makeup">Makeup</option>
+                            <option value="all">All Services</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price-range">Price Range</label>
+                        <select id="price-range" name="price-range">
+                            <option value="budget">Budget ($-$$)</option>
+                            <option value="moderate">Moderate ($$-$$$)</option>
+                            <option value="premium">Premium ($$$-$$$$)</option>
+                            <option value="luxury">Luxury ($$$$+)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Minimum Experience</label>
+                        <input type="range" id="experience" name="experience" min="0" max="20" value="5">
+                        <span id="exp-value">5 years</span>
+                    </div>
+                    <button type="submit" class="submit-btn">Search Stylists</button>
+                </form>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </section>
+
+        <section id="stylists" class="stylists-section">
+            <div class="container">
+                <h2>Featured Stylists</h2>
+                <div class="stylist-grid" id="stylistGrid">
+                    <!-- Haircut Specialists -->
+                    <article class="stylist-card" data-service="haircut" data-price="premium" data-exp="15">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">JS</div>
+                        </div>
+                        <h3>Jessica Smith</h3>
+                        <p class="specialty">Specialty: Haircut</p>
+                        <p class="experience">15 Years Experience</p>
+                        <p class="location">Downtown, New York</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ 4.9 (230 reviews)</p>
+                        <p class="price">$$$ - Premium</p>
+                        <a href="#book" class="book-btn" data-stylist="Jessica Smith" data-price="$$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="haircut" data-price="moderate" data-exp="8">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">MJ</div>
+                        </div>
+                        <h3>Michael Johnson</h3>
+                        <p class="specialty">Specialty: Haircut</p>
+                        <p class="experience">8 Years Experience</p>
+                        <p class="location">Brooklyn, New York</p>
+                        <p class="rating">⭐⭐⭐⭐ 4.5 (145 reviews)</p>
+                        <p class="price">$$ - Moderate</p>
+                        <a href="#book" class="book-btn" data-stylist="Michael Johnson" data-price="$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="haircut" data-price="budget" data-exp="5">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">DP</div>
+                        </div>
+                        <h3>David Park</h3>
+                        <p class="specialty">Specialty: Haircut</p>
+                        <p class="experience">5 Years Experience</p>
+                        <p class="location">Queens, New York</p>
+                        <p class="rating">⭐⭐⭐⭐ 4.3 (89 reviews)</p>
+                        <p class="price">$ - Budget</p>
+                        <a href="#book" class="book-btn" data-stylist="David Park" data-price="$">Book Now</a>
+                    </article>
+
+                    <!-- Hair Coloring Specialists -->
+                    <article class="stylist-card" data-service="coloring" data-price="luxury" data-exp="20">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">EC</div>
+                        </div>
+                        <h3>Emily Chen</h3>
+                        <p class="specialty">Specialty: Hair Coloring</p>
+                        <p class="experience">20 Years Experience</p>
+                        <p class="location">Manhattan, New York</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ 5.0 (412 reviews)</p>
+                        <p class="price">$$$$ - Luxury</p>
+                        <a href="#book" class="book-btn" data-stylist="Emily Chen" data-price="$$$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="coloring" data-price="premium" data-exp="12">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">SR</div>
+                        </div>
+                        <h3>Sarah Rodriguez</h3>
+                        <p class="specialty">Specialty: Hair Coloring</p>
+                        <p class="experience">12 Years Experience</p>
+                        <p class="location">Manhattan, New York</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ 4.8 (298 reviews)</p>
+                        <p class="price">$$$ - Premium</p>
+                        <a href="#book" class="book-btn" data-stylist="Sarah Rodriguez" data-price="$$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="coloring" data-price="moderate" data-exp="7">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">LT</div>
+                        </div>
+                        <h3>Lisa Thompson</h3>
+                        <p class="specialty">Specialty: Hair Coloring</p>
+                        <p class="experience">7 Years Experience</p>
+                        <p class="location">Brooklyn, New York</p>
+                        <p class="rating">⭐⭐⭐⭐ 4.4 (156 reviews)</p>
+                        <p class="price">$$ - Moderate</p>
+                        <a href="#book" class="book-btn" data-stylist="Lisa Thompson" data-price="$$">Book Now</a>
+                    </article>
+
+                    <!-- Hair Styling Specialists -->
+                    <article class="stylist-card" data-service="styling" data-price="luxury" data-exp="18">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">AM</div>
+                        </div>
+                        <h3>Alex Martinez</h3>
+                        <p class="specialty">Specialty: Hair Styling</p>
+                        <p class="experience">18 Years Experience</p>
+                        <p class="location">Manhattan, New York</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ 4.9 (385 reviews)</p>
+                        <p class="price">$$$$ - Luxury</p>
+                        <a href="#book" class="book-btn" data-stylist="Alex Martinez" data-price="$$$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="styling" data-price="premium" data-exp="10">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">NK</div>
+                        </div>
+                        <h3>Nina Kumar</h3>
+                        <p class="specialty">Specialty: Hair Styling</p>
+                        <p class="experience">10 Years Experience</p>
+                        <p class="location">Downtown, New York</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ 4.7 (210 reviews)</p>
+                        <p class="price">$$$ - Premium</p>
+                        <a href="#book" class="book-btn" data-stylist="Nina Kumar" data-price="$$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="styling" data-price="budget" data-exp="4">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">RW</div>
+                        </div>
+                        <h3>Ryan White</h3>
+                        <p class="specialty">Specialty: Hair Styling</p>
+                        <p class="experience">4 Years Experience</p>
+                        <p class="location">Queens, New York</p>
+                        <p class="rating">⭐⭐⭐⭐ 4.2 (78 reviews)</p>
+                        <p class="price">$ - Budget</p>
+                        <a href="#book" class="book-btn" data-stylist="Ryan White" data-price="$">Book Now</a>
+                    </article>
+
+                    <!-- Makeup Specialists -->
+                    <article class="stylist-card" data-service="makeup" data-price="luxury" data-exp="16">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">MB</div>
+                        </div>
+                        <h3>Maria Brown</h3>
+                        <p class="specialty">Specialty: Makeup</p>
+                        <p class="experience">16 Years Experience</p>
+                        <p class="location">Manhattan, New York</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ 5.0 (445 reviews)</p>
+                        <p class="price">$$$$ - Luxury</p>
+                        <a href="#book" class="book-btn" data-stylist="Maria Brown" data-price="$$$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="makeup" data-price="premium" data-exp="11">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">JL</div>
+                        </div>
+                        <h3>James Lee</h3>
+                        <p class="specialty">Specialty: Makeup</p>
+                        <p class="experience">11 Years Experience</p>
+                        <p class="location">Downtown, New York</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ 4.8 (267 reviews)</p>
+                        <p class="price">$$$ - Premium</p>
+                        <a href="#book" class="book-btn" data-stylist="James Lee" data-price="$$$">Book Now</a>
+                    </article>
+
+                    <article class="stylist-card" data-service="makeup" data-price="moderate" data-exp="6">
+                        <div class="stylist-image">
+                            <div class="placeholder-img">KD</div>
+                        </div>
+                        <h3>Kelly Davis</h3>
+                        <p class="specialty">Specialty: Makeup</p>
+                        <p class="experience">6 Years Experience</p>
+                        <p class="location">Brooklyn, New York</p>
+                        <p class="rating">⭐⭐⭐⭐ 4.5 (134 reviews)</p>
+                        <p class="price">$$ - Moderate</p>
+                        <a href="#book" class="book-btn" data-stylist="Kelly Davis" data-price="$$">Book Now</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing-section">
+            <div class="container">
+                <h2>Pricing Comparison</h2>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Budget ($)</th>
+                            <th>Moderate ($$)</th>
+                            <th>Premium ($$$)</th>
+                            <th>Luxury ($$$$)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Haircut</td>
+                            <td>$25-40</td>
+                            <td>$45-70</td>
+                            <td>$75-120</td>
+                            <td>$125-200+</td>
+                        </tr>
+                        <tr>
+                            <td>Hair Coloring</td>
+                            <td>$60-90</td>
+                            <td>$95-150</td>
+                            <td>$155-250</td>
+                            <td>$255-400+</td>
+                        </tr>
+                        <tr>
+                            <td>Hair Styling</td>
+                            <td>$30-50</td>
+                            <td>$55-85</td>
+                            <td>$90-140</td>
+                            <td>$145-250+</td>
+                        </tr>
+                        <tr>
+                            <td>Makeup</td>
+                            <td>$40-65</td>
+                            <td>$70-110</td>
+                            <td>$115-180</td>
+                            <td>$185-300+</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <div class="contact-content">
+                    <article class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p><strong>Email:</strong> info@stylefinder.com</p>
+                        <p><strong>Phone:</strong> (555) 123-4567</p>
+                        <p><strong>Address:</strong> 123 Fashion Ave, New York, NY 10001</p>
+                        <p><strong>Hours:</strong> Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</p>
+                    </article>
+
+                    <article class="contact-form-wrapper">
+                        <h3>Send a Message</h3>
+                        <form class="contact-form" id="contactForm">
+                            <input type="text" id="contactName" name="name" placeholder="Your Name" required>
+                            <input type="email" id="contactEmail" name="email" placeholder="Your Email" required>
+                            <textarea id="contactMessage" name="message" rows="5" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                        <div id="contactStatus" class="form-status"></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Book Appointment</h2>
+            <p id="modalStylistName"></p>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="bookName">Your Name</label>
+                    <input type="text" id="bookName" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookEmail">Email</label>
+                    <input type="email" id="bookEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookPhone">Phone Number</label>
+                    <input type="tel" id="bookPhone" pattern="[0-9]{10}" placeholder="1234567890" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookDate">Preferred Date</label>
+                    <input type="date" id="bookDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookTime">Preferred Time</label>
+                    <input type="time" id="bookTime" required>
+                </div>
+                <button type="submit" class="submit-btn">Confirm Booking</button>
+            </form>
+            <div id="bookingStatus" class="form-status"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 StyleFinder. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
